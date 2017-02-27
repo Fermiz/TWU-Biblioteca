@@ -15,14 +15,65 @@ public class BibliotecaApp {
         this.inputValid = true;
     }
 
+    private void applySelectedMenuOption(Integer input) {
+        switch (input) {
+            case 0:
+                this.quit();
+                break;
+            case 1:
+                this.listBooks(this.bookList);
+                break;
+            default:
+                System.out.println("Select a valid option!");
+        }
+    }
+
+    private Integer getUserInput() {
+        Integer input = 0;
+        try {
+            System.out.print("\nMenu selection: \n");
+            input = this.scanner.nextInt();
+        } catch (Exception e) {
+
+        }
+        return input;
+    }
+
+    public void respondToUserInput() {
+        while (this.inputValid) {
+            applySelectedMenuOption(getUserInput());
+        }
+    }
 
     public void start(){
         this.getWelcomeMessage();
     }
 
-    public void getWelcomeMessage(){
-        System.out.println("Welcome To The Biblioteca Library!");
+    public void quit(){
+        System.out.println("See you next time!");
+        this.inputValid = false;
+    }
 
+    public void getWelcomeMessage(){
+        System.out.println("Welcome To The Biblioteca Library System!");
+        this.showMenuOptions();
+    }
+
+    public void showMenuOptions() {
+        System.out.println("Menu Options:");
+        System.out.println("1.Enter [1] to show all books");
+        System.out.println("2.Enter [0] to show quit the system");
+        this.respondToUserInput();
+    }
+
+
+
+    public void listBooks(ArrayList<Book> bookList){
+        String output = "";
+        for (Book book : bookList){
+            output += book.getBookInfo() + "\n";
+        }
+        System.out.print(output);
     }
 
 
