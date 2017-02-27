@@ -16,6 +16,16 @@ public class BibliotecaApp {
     }
 
 
+    public void start(){
+        this.getWelcomeMessage();
+    }
+
+    public void getWelcomeMessage(){
+        System.out.println("Welcome To The Biblioteca Library!");
+
+    }
+
+
 
     public static void main(String[] args) {
         ArrayList<Book> bookList = new ArrayList();
