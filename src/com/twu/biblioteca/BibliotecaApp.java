@@ -66,8 +66,6 @@ public class BibliotecaApp {
         this.respondToUserInput();
     }
 
-
-
     public void listBooks(ArrayList<Book> bookList){
         String output = "";
         for (Book book : bookList){
