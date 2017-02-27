@@ -15,6 +15,6 @@ public class Book {
     }
 
     public String getBookInfo() {
-        return String.format("%-30.30s | %-30.30s | %d", title, author, year);
+        return String.format("%-30s | %-20s | %d", title, author, year);
     }
 }
