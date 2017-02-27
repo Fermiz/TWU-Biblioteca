@@ -53,6 +53,13 @@ public class BibliotecaAppTest {
     }
 
     @Test
+    public void shouldQuitAndSayGoodByeWhenInputZero() throws IOException{
+        when(in.readLine()).thenReturn("0");
+        bibliotecaApp.start();
+        verify(out).println(contains("See you next time!"));
+    }
+
+    @Test
     public void shouldReportErroWhenInputIsNotInteger() throws IOException{
         when(in.readLine()).thenReturn("XXXXXX").thenReturn("1");
         bookList.add(theBookThief);
@@ -69,7 +76,7 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void shouldListExistingBooksInLibrary(){
+    public void shouldListBooksInLibrary(){
         bookList.add(theBookThief);
         when(theBookThief.getBookInfo()).thenReturn("test info");
         bibliotecaApp.listBooks(bookList);
@@ -81,7 +88,5 @@ public class BibliotecaAppTest {
         bibliotecaApp.listBooks(bookList);
         verify(out).print(contains(""));
     }
-
-
 
 }
