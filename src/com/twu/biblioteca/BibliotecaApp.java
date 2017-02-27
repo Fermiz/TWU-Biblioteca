@@ -1,52 +1,22 @@
 package com.twu.biblioteca;
 
-import java.io.InputStream;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class BibliotecaApp {
 
     private ArrayList<Book> bookList;
     private final PrintStream out;
-    private Scanner scanner;
+    private BufferedReader in;
     private Boolean inputValid;
 
-    public BibliotecaApp(ArrayList<Book> listOfBooks, InputStream in, PrintStream out) {
+    public BibliotecaApp(ArrayList<Book> listOfBooks, BufferedReader in, PrintStream out) {
         this.bookList = listOfBooks;
         this.out = out;
-        this.scanner = new Scanner(in);
+        this.in = in;
         this.inputValid = true;
-    }
-
-    private void applySelectedMenuOption(Integer input) {
-        switch (input) {
-            case 0:
-                this.quit();
-                break;
-            case 1:
-                this.listBooks(this.bookList);
-                break;
-            default:
-                this.out.println("Select a valid option!");
-        }
-    }
-
-    private Integer getUserInput() {
-        Integer input = 0;
-        try {
-            this.out.print("\nMenu selection: \n");
-            input = this.scanner.nextInt();
-        } catch (Exception e) {
-
-        }
-        return input;
-    }
-
-    public void respondToUserInput() {
-        while (this.inputValid) {
-            applySelectedMenuOption(getUserInput());
-        }
     }
 
     public void start(){
@@ -70,6 +40,37 @@ public class BibliotecaApp {
         this.respondToUserInput();
     }
 
+    public void respondToUserInput() {
+        while (this.inputValid) {
+            applySelectedMenuOption(getUserInput());
+        }
+    }
+
+    public void applySelectedMenuOption(Integer input) {
+        switch (input) {
+            case 0:
+                this.quit();
+                break;
+            case 1:
+                this.listBooks(this.bookList);
+                this.quit();//for test to quit
+                break;
+            default:
+                this.out.println("Select a valid option!");
+        }
+    }
+
+    public Integer getUserInput() {
+        Integer input = 0;
+        try {
+            this.out.print("\nMenu selection: \n");
+            input =  Integer.parseInt(in.readLine());
+        } catch (Exception e) {
+            this.out.println("Select a valid option!");
+        }
+        return input;
+    }
+
     public void listBooks(ArrayList<Book> bookList){
         String output = "";
         for (Book book : bookList){
@@ -87,7 +88,7 @@ public class BibliotecaApp {
         bookList.add(new Book("Life of Pi", "Yann Martel", 2007));
         bookList.add(new Book("A Song of Ice and Fire", "George R.R. Martin", 2012));
 
-        BibliotecaApp biblioteca = new BibliotecaApp(bookList, System.in, new PrintStream(System.out));
+        BibliotecaApp biblioteca = new BibliotecaApp(bookList, new BufferedReader(new InputStreamReader(System.in)), new PrintStream(System.out));
 
         biblioteca.start();
     }
