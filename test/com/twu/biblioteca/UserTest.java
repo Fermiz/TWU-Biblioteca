@@ -18,17 +18,18 @@ public class UserTest {
     }
 
     @Test
+    public void shouldGetNumber() {
+        assertEquals("101-1234", user.getNumber());
+    }
+
+    @Test
+    public void shouldGetPassword() {
+        assertEquals("qazwsx123", user.getPassword());
+    }
+
+    @Test
     public void shouldGetUserInfoInFormat() {
         assertEquals(String.format("%-20s | %-20s | %-20s | %-20s | %-20s", "101-1234","Transformers", "qazwsx123", "12345678@gmail.com","12345678900"), user.getUserInfo());
     }
 
-    @Test
-    public void shouldReturnTrueIfPasswordCorrect() {
-        assertTrue("true", user.login("qazwsx123"));
-    }
-
-    @Test
-    public void shouldReturnFalseIfPasswordWrong() {
-        assertFalse("false", user.login("123qazwsx"));
-    }
 }

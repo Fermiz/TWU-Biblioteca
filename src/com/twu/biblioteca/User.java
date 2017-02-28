@@ -19,16 +19,16 @@ public class User {
         this.phone = phone;
     }
 
-    public String getUserInfo() {
-        return String.format("%-20s | %-20s | %-20s | %-20s | %-20s", no, name, password, email, phone);
-    }
-
     public String getNumber(){
         return this.no;
     }
 
     public String getPassword(){
         return this.password;
+    }
+
+    public String getUserInfo() {
+        return String.format("%-20s | %-20s | %-20s | %-20s | %-20s", no, name, password, email, phone);
     }
 
 }

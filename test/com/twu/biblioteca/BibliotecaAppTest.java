@@ -19,6 +19,8 @@ import static org.mockito.Mockito.when;
 public class BibliotecaAppTest {
     private BibliotecaApp bibliotecaApp;
     private ArrayList<Book> bookList;
+    private ArrayList<Movie> movieList;
+    private ArrayList<User> userList;
     private Book theBookThief;
     private BufferedReader in;
     private PrintStream out;
@@ -26,10 +28,12 @@ public class BibliotecaAppTest {
     @Before
     public void setUp(){
         bookList = new ArrayList();
+        movieList = new ArrayList();
+        userList = new ArrayList();
         in = mock(BufferedReader.class);
         out = mock(PrintStream.class);
         theBookThief = mock(Book.class);
-        bibliotecaApp = new BibliotecaApp(bookList,in,out);
+        bibliotecaApp = new BibliotecaApp(userList,bookList,movieList,in,out);
     }
 
     @Test
@@ -48,7 +52,7 @@ public class BibliotecaAppTest {
 
     @Test
     public void shouldListNothingWhenThereIsNoBook(){
-        bibliotecaApp.listBooks(bookList);
+        bibliotecaApp.listBooks();
         verify(out).print(contains(""));
     }
 

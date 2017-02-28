@@ -17,7 +17,23 @@ public class BookTest {
     }
 
     @Test
+    public void shouldGetBookTitle() {
+        assertEquals("The Book Thief", book.getTitle());
+    }
+
+    @Test
+    public void shouldGetBookBorrower() {
+        assertEquals("", book.getBorrower());
+    }
+
+    @Test
     public void shouldGetBookInfoInFormat() {
         assertEquals(String.format("%-30s | %-20s | %d","The Book Thief", "Markus Zusak", 2007), book.getBookInfo());
+    }
+
+    @Test
+    public void shouldSetBookBorrower() {
+        book.setBorrower("100-10001");
+        assertEquals("100-10001", book.getBorrower());
     }
 }

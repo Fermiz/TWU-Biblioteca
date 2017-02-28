@@ -113,13 +113,13 @@ public class BibliotecaApp {
                 if(book.getTitle().equals(title) && book.getBorrower() == ""){
                     checkStatus = true;
                     book.setBorrower(this.userNow);
-                    this.out.println("Thank you! Enjoy the book");
+                    this.out.println("\nThank you! Enjoy the book");
                     break;
                 }
             }
 
             if(!checkStatus){
-                this.out.println("That book is not available.");
+                this.out.println("\nThat book is not available.");
             }
         }
     }
@@ -133,13 +133,13 @@ public class BibliotecaApp {
                 if(book.getTitle().equals(title) && book.getBorrower() != ""){
                     checkStatus = true;
                     book.setBorrower("");
-                    this.out.println("Thank you for returning the book.");
+                    this.out.println("\nThank you for returning the book.");
                     break;
                 }
             }
 
             if(!checkStatus){
-                this.out.println("That is not a valid book to return.");
+                this.out.println("\nThat is not a valid book to return.");
             }
         }
     }
@@ -147,13 +147,31 @@ public class BibliotecaApp {
     public void listMovies(){
         String output = "";
         for (Movie movie : this.movieList){
-            output += movie.getMovieInfo() + "\n";
+            if( movie.getBorrower() == "") {
+                output += movie.getMovieInfo() + "\n";
+            }
         }
         this.out.print(output);
     }
 
     public void checkoutMovie(){
+        this.loginCheck();
+        if(this.userNow != ""){
+            String title = this.getMoiveName();
+            boolean checkStatus = false;
+            for (Movie movie : this.movieList){
+                if(movie.getName().equals(title) && movie.getBorrower() == ""){
+                    checkStatus = true;
+                    movie.setBorrower(this.userNow);
+                    this.out.println("\nThank you! Enjoy the movie");
+                    break;
+                }
+            }
 
+            if(!checkStatus){
+                this.out.println("\nThat movie is not available.");
+            }
+        }
     }
 
     public void loginCheck(){
@@ -190,6 +208,17 @@ public class BibliotecaApp {
             e.printStackTrace();
         }
         return title;
+    }
+
+    public String getMoiveName(){
+        this.out.print("\nThe movie name: \n");
+        String name = "";
+        try {
+            name = in.readLine();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return name;
     }
 
     public String getUserNumber(){
