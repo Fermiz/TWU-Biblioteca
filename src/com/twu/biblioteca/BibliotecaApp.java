@@ -8,12 +8,17 @@ import java.util.ArrayList;
 public class BibliotecaApp {
 
     private ArrayList<Book> bookList;
+    private ArrayList<Movie> movieList;
+    private ArrayList<User> userList;
     private final PrintStream out;
     private BufferedReader in;
     private Boolean inputValid;
 
-    public BibliotecaApp(ArrayList<Book> listOfBooks, BufferedReader in, PrintStream out) {
+    public BibliotecaApp(ArrayList<User> listOfUsers, ArrayList<Book> listOfBooks, ArrayList<Movie> listOfMovies,BufferedReader in, PrintStream out) {
+
+        this.userList = listOfUsers;
         this.bookList = listOfBooks;
+        this.movieList = listOfMovies;
         this.out = out;
         this.in = in;
         this.inputValid = true;
@@ -36,12 +41,12 @@ public class BibliotecaApp {
     public void showMenuOptions() {
         this.out.println("Menu Options:");
         this.out.println("1.Enter [1] to show all books");
-        this.out.println("1.Enter [2] to checkout book");
-        this.out.println("1.Enter [3] to return book");
-        this.out.println("1.Enter [4] to show all movies");
-        this.out.println("1.Enter [5] to checkout movie");
-        this.out.println("1.Enter [6] to return movie");
-        this.out.println("2.Enter [0] to quit the system");
+        this.out.println("2.Enter [2] to checkout book");
+        this.out.println("3.Enter [3] to return book");
+        this.out.println("4.Enter [4] to show all movies");
+        this.out.println("5.Enter [5] to checkout movie");
+        this.out.println("6.Enter [6] to return movie");
+        this.out.println("7.Enter [0] to quit the system");
         this.respondToUserInput();
     }
 
@@ -58,7 +63,18 @@ public class BibliotecaApp {
                 break;
             case 1:
                 this.listBooks(this.bookList);
-                this.quit();//for test to quit
+                break;
+            case 2:
+                this.checkoutBook();
+                break;
+            case 3:
+                this.returnBook();
+                break;
+            case 4:
+                this.listMovies(this.movieList);
+                break;
+            case 5:
+                this.checkoutMovie();
                 break;
             default:
                 this.out.println("Select a valid option!");
@@ -84,14 +100,6 @@ public class BibliotecaApp {
         this.out.print(output);
     }
 
-    public void listMovies(ArrayList<Movie> movieList){
-        String output = "";
-        for (Movie movie : movieList){
-            output += movie.getMovieInfo() + "\n";
-        }
-        this.out.print(output);
-    }
-
     public void checkoutBook(){
 
     }
@@ -100,17 +108,17 @@ public class BibliotecaApp {
 
     }
 
-    public static void main(String[] args) {
-        ArrayList<Book> bookList = new ArrayList();
-
-        bookList.add(new Book("1","The Book Thief", "Markus Zusak", 2007));
-        bookList.add(new Book("2","Gone with the Wind", "Margaret Mitchell", 2011));
-        bookList.add(new Book("3","Life of Pi", "Yann Martel", 2007));
-        bookList.add(new Book("4","A Song of Ice and Fire", "George R.R. Martin", 2012));
-
-        BibliotecaApp biblioteca = new BibliotecaApp(bookList, new BufferedReader(new InputStreamReader(System.in)), new PrintStream(System.out));
-
-        biblioteca.start();
+    public void listMovies(ArrayList<Movie> movieList){
+        String output = "";
+        for (Movie movie : movieList){
+            output += movie.getMovieInfo() + "\n";
+        }
+        this.out.print(output);
     }
+
+    public void checkoutMovie(){
+
+    }
+
 
 }

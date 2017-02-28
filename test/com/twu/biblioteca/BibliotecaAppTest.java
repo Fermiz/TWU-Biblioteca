@@ -33,13 +33,15 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void shouldPrintWelcomeMessageWhenStart(){
+    public void shouldPrintWelcomeMessageWhenStart() throws IOException{
+        when(in.readLine()).thenReturn("0");
         bibliotecaApp.start();
         verify(out).println(contains("Welcome To The Biblioteca Library System!"));
     }
 
     @Test
-    public void shouldShowMenuOptionsWhenMenuIsShow(){
+    public void shouldShowMenuOptionsWhenMenuIsShow() throws IOException{
+        when(in.readLine()).thenReturn("0");
         bibliotecaApp.start();
         verify(out).println(contains("1.Enter [1] to show all books"));
     }
@@ -54,7 +56,7 @@ public class BibliotecaAppTest {
     public void shouldListBooksInLibraryWhenInputsOne() throws IOException{
         bookList.add(theBookThief);
         when(theBookThief.getBookInfo()).thenReturn("test info");
-        when(in.readLine()).thenReturn("1");
+        when(in.readLine()).thenReturn("1").thenReturn("0");
         bibliotecaApp.start();
         verify(out).print(contains("test info"));
     }

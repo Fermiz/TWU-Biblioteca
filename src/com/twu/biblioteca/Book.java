@@ -8,12 +8,14 @@ public class Book {
     private String title;
     private String author;
     private int year;
+    private boolean isCheckedOut;
 
     public Book(String no,String title, String author, int year) {
         this.no = no;
         this.title = title;
         this.author = author;
         this.year = year;
+        this.isCheckedOut = false;
     }
 
     public String getBookInfo() {
