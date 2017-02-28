@@ -45,11 +45,18 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void shouldGetBookInfoWhenInputsOne() throws IOException{
-        when(in.readLine()).thenReturn("1");
+    public void shouldListNothingWhenThereIsNoBook(){
+        bibliotecaApp.listBooks(bookList);
+        verify(out).print(contains(""));
+    }
+
+    @Test
+    public void shouldListBooksInLibraryWhenInputsOne() throws IOException{
         bookList.add(theBookThief);
+        when(theBookThief.getBookInfo()).thenReturn("test info");
+        when(in.readLine()).thenReturn("1");
         bibliotecaApp.start();
-        verify(theBookThief).getBookInfo();
+        verify(out).print(contains("test info"));
     }
 
     @Test
@@ -61,7 +68,7 @@ public class BibliotecaAppTest {
 
     @Test
     public void shouldReportErroWhenInputIsNotInteger() throws IOException{
-        when(in.readLine()).thenReturn("XXXXXX").thenReturn("1");
+        when(in.readLine()).thenReturn("XXXXXX").thenReturn("0");
         bookList.add(theBookThief);
         bibliotecaApp.start();
         verify(out).println(contains("Select a valid option!"));
@@ -69,24 +76,11 @@ public class BibliotecaAppTest {
 
     @Test
     public void shouldReportErrorWhenInvalidOptionSelected() throws IOException{
-        when(in.readLine()).thenReturn("-1").thenReturn("1");
+        when(in.readLine()).thenReturn("-1").thenReturn("0");
         bookList.add(theBookThief);
         bibliotecaApp.start();
         verify(out).println(contains("Select a valid option!"));
     }
 
-    @Test
-    public void shouldListBooksInLibrary(){
-        bookList.add(theBookThief);
-        when(theBookThief.getBookInfo()).thenReturn("test info");
-        bibliotecaApp.listBooks(bookList);
-        verify(out).print(contains("test info"));
-    }
-
-    @Test
-    public void shouldListNothingWhenBooksIsNull(){
-        bibliotecaApp.listBooks(bookList);
-        verify(out).print(contains(""));
-    }
 
 }

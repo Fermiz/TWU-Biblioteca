@@ -13,11 +13,11 @@ public class BookTest {
 
     @Before
     public void setUp() {
-        book = new Book("The Book Thief", "Markus Zusak", 2007);
+        book = new Book("1","The Book Thief", "Markus Zusak", 2007);
     }
 
     @Test
-    public void shouldConvertDetailsToString() {
+    public void shouldGetBookInfoInFormat() {
         assertEquals(String.format("%-30s | %-20s | %d","The Book Thief", "Markus Zusak", 2007), book.getBookInfo());
     }
 }

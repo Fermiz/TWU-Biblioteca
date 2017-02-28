@@ -36,7 +36,12 @@ public class BibliotecaApp {
     public void showMenuOptions() {
         this.out.println("Menu Options:");
         this.out.println("1.Enter [1] to show all books");
-        this.out.println("2.Enter [0] to show quit the system");
+        this.out.println("1.Enter [2] to checkout book");
+        this.out.println("1.Enter [3] to return book");
+        this.out.println("1.Enter [4] to show all movies");
+        this.out.println("1.Enter [5] to checkout movie");
+        this.out.println("1.Enter [6] to return movie");
+        this.out.println("2.Enter [0] to quit the system");
         this.respondToUserInput();
     }
 
@@ -79,14 +84,29 @@ public class BibliotecaApp {
         this.out.print(output);
     }
 
+    public void listMovies(ArrayList<Movie> movieList){
+        String output = "";
+        for (Movie movie : movieList){
+            output += movie.getMovieInfo() + "\n";
+        }
+        this.out.print(output);
+    }
 
+    public void checkoutBook(){
+
+    }
+
+    public void returnBook(){
+
+    }
 
     public static void main(String[] args) {
         ArrayList<Book> bookList = new ArrayList();
-        bookList.add(new Book("The Book Thief", "Markus Zusak", 2007));
-        bookList.add(new Book("Gone with the Wind", "Margaret Mitchell", 2011));
-        bookList.add(new Book("Life of Pi", "Yann Martel", 2007));
-        bookList.add(new Book("A Song of Ice and Fire", "George R.R. Martin", 2012));
+
+        bookList.add(new Book("1","The Book Thief", "Markus Zusak", 2007));
+        bookList.add(new Book("2","Gone with the Wind", "Margaret Mitchell", 2011));
+        bookList.add(new Book("3","Life of Pi", "Yann Martel", 2007));
+        bookList.add(new Book("4","A Song of Ice and Fire", "George R.R. Martin", 2012));
 
         BibliotecaApp biblioteca = new BibliotecaApp(bookList, new BufferedReader(new InputStreamReader(System.in)), new PrintStream(System.out));
 
