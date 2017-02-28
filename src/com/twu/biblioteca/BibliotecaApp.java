@@ -1,7 +1,7 @@
 package com.twu.biblioteca;
 
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
@@ -13,6 +13,7 @@ public class BibliotecaApp {
     private final PrintStream out;
     private BufferedReader in;
     private Boolean inputValid;
+    private Boolean isLogin;
 
     public BibliotecaApp(ArrayList<User> listOfUsers, ArrayList<Book> listOfBooks, ArrayList<Movie> listOfMovies,BufferedReader in, PrintStream out) {
 
@@ -22,6 +23,7 @@ public class BibliotecaApp {
         this.out = out;
         this.in = in;
         this.inputValid = true;
+        this.isLogin = false;
     }
 
     public void start(){
@@ -62,7 +64,7 @@ public class BibliotecaApp {
                 this.quit();
                 break;
             case 1:
-                this.listBooks(this.bookList);
+                this.listBooks();
                 break;
             case 2:
                 this.checkoutBook();
@@ -71,7 +73,7 @@ public class BibliotecaApp {
                 this.returnBook();
                 break;
             case 4:
-                this.listMovies(this.movieList);
+                this.listMovies();
                 break;
             case 5:
                 this.checkoutMovie();
@@ -92,25 +94,24 @@ public class BibliotecaApp {
         return input;
     }
 
-    public void listBooks(ArrayList<Book> bookList){
+    public void listBooks(){
         String output = "";
-        for (Book book : bookList){
+        for (Book book : this.bookList){
             output += book.getBookInfo() + "\n";
         }
         this.out.print(output);
     }
 
     public void checkoutBook(){
-
     }
 
     public void returnBook(){
 
     }
 
-    public void listMovies(ArrayList<Movie> movieList){
+    public void listMovies(){
         String output = "";
-        for (Movie movie : movieList){
+        for (Movie movie : this.movieList){
             output += movie.getMovieInfo() + "\n";
         }
         this.out.print(output);
@@ -118,6 +119,26 @@ public class BibliotecaApp {
 
     public void checkoutMovie(){
 
+    }
+
+    public void userLogin(String userNumber, String password){
+        for (User user : this.userList){
+            if (user.getNumber().equals(userNumber)){
+                if(user.getPassword().equals(password)){
+                    this.isLogin = true;
+                }
+            }
+        }
+    }
+
+    public String getUserNumber() throws IOException{
+        this.out.print("\nUser number: \n");
+        return in.readLine();
+    }
+
+    public String getUserPassword() throws IOException{
+        this.out.print("\npassword: \n");
+        return in.readLine();
     }
 
 

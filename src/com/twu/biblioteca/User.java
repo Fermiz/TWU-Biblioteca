@@ -23,11 +23,12 @@ public class User {
         return String.format("%-20s | %-20s | %-20s | %-20s | %-20s", no, name, password, email, phone);
     }
 
-    public boolean login(String password){
-        if (this.password == password){
-            return true;
-        }
-        return false;
+    public String getNumber(){
+        return this.no;
+    }
+
+    public String getPassword(){
+        return this.password;
     }
 
 }
