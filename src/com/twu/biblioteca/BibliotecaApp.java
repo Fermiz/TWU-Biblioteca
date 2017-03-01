@@ -113,7 +113,7 @@ public class BibliotecaApp {
                 if(book.getTitle().equals(title) && book.getBorrower() == ""){
                     checkStatus = true;
                     book.setBorrower(this.userNow);
-                    this.out.println("\nThank you! Enjoy the book");
+                    this.out.println("\nThank you! Enjoy the book.");
                     break;
                 }
             }
@@ -157,7 +157,7 @@ public class BibliotecaApp {
     public void checkoutMovie(){
         this.loginCheck();
         if(this.userNow != ""){
-            String title = this.getMoiveName();
+            String title = this.getMovieName();
             boolean checkStatus = false;
             for (Movie movie : this.movieList){
                 if(movie.getName().equals(title) && movie.getBorrower() == ""){
@@ -210,7 +210,7 @@ public class BibliotecaApp {
         return title;
     }
 
-    public String getMoiveName(){
+    public String getMovieName(){
         this.out.print("\nThe movie name: \n");
         String name = "";
         try {
